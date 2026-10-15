@@ -49,9 +49,9 @@ samples_by_month <- dat %>%
 samples_by_sex <- dat %>%
   count(sex, name = "n_samples", sort = TRUE)
 
-# Samples by fishery
-samples_by_fishery <- dat %>%
-  count(fishery, name = "n_samples", sort = TRUE)
+# Samples by sector
+samples_by_sector <- dat %>%
+  count(sector, name = "n_samples", sort = TRUE)
 
 ######################################
 #DATA SUMMARY PLOTS
@@ -229,19 +229,19 @@ p4 <- ggplot(dat_vitality %>% filter(!is.na(length)),
 save_plot(p4, "vitality_by_length.png",
           width = 14, height = 9)
 
-#Plot 5: Vitality by fishery, faceted by species:
-p5 <- ggplot(dat_vitality, aes(x = fishery, fill = vitality)) +
+#Plot 5: Vitality by sector, faceted by species:
+p5 <- ggplot(dat_vitality, aes(x = sector, fill = vitality)) +
   geom_bar(position = "fill") +
   facet_wrap(~ species, scales = "free_x") +
   scale_fill_manual(values = vitality_colors, drop = FALSE) +
   scale_y_continuous(labels = percent) +
-  labs(title = "Vitality by Fishery and Species",
-    x = "Fishery", y = "Proportion of Samples",
+  labs(title = "Vitality by Sector and Species",
+    x = "Sector", y = "Proportion of Samples",
     fill = "Vitality") +
   theme(axis.text.x = element_text(
       angle = 45, hjust = 1))
 
-save_plot(p5, "vitality_by_fishery.png",
+save_plot(p5, "vitality_by_sector.png",
           width = 12, height = 8)
 
 #Plot 6: Vitality by month, faceted by species
